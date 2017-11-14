@@ -5,6 +5,14 @@
  */
 package javaapplication1;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+
 /**
  *
  * @author jiaweiloo
@@ -130,6 +138,16 @@ public class Attendance extends javax.swing.JFrame {
                 new Attendance().setVisible(true);
             }
         });
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //get current date time with Date()
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
+        Attendance att = new Attendance();
+        JTextField jtf = new JTextField();
+
+        att.jTextField1.setText(dateFormat.format(date));
+        System.out.println(dateFormat.format(date));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

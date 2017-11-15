@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
@@ -22,6 +23,8 @@ public class Attendance extends javax.swing.JFrame {
     /**
      * Creates new form Attendance
      */
+    public String currentEMP = "";
+
     public Attendance() {
         initComponents();
     }
@@ -41,15 +44,18 @@ public class Attendance extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        scrollPane1 = new java.awt.ScrollPane();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EMPLOYEE ATTENDANCE");
 
         jLabel1.setText("Employee ID:");
 
+        jtfEmpID.setText("1505123");
         jtfEmpID.setToolTipText("");
 
         jLabel2.setText("Current Time:");
@@ -58,12 +64,33 @@ public class Attendance extends javax.swing.JFrame {
         jTextField1.setText("  00:00:00am 01/01/2000");
 
         jButton1.setText("Clock-in");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Clock-out");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Unique ID:");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("abc123");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton3.setText("Clear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +99,7 @@ public class Attendance extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -80,18 +107,20 @@ public class Attendance extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 242, Short.MAX_VALUE)))
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 161, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,14 +141,52 @@ public class Attendance extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //String textFieldValue = testField.getText();
+        //scrollPane1.
+        //jTextField1.getText();
+
+        if (!currentEMP.equals(jtfEmpID.getText())) {
+            currentEMP = jtfEmpID.getText();
+            jTextArea1.setText("");
+        } 
+        if (!jPasswordField1.getText().equals("abc123")) {
+            JOptionPane.showMessageDialog(null, "Unique ID incorrect", "InfoBox: " + "AAA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            jTextArea1.append("EMP ID: " + currentEMP + "  ; Clock-in time   : " + new Date().toString() + "\n");
+            jTextField1.setText(new Date().toString());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (!currentEMP.equals(jtfEmpID.getText())) {
+            currentEMP = jtfEmpID.getText();
+            jTextArea1.setText("");
+        } 
+        if (!jPasswordField1.getText().equals("abc123")) {
+            JOptionPane.showMessageDialog(null, "Unique ID incorrect", "InfoBox: " + "AAA", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            jTextArea1.append("EMP ID: " + jtfEmpID.getText() + "  ; Clock-out time : " + new Date().toString() + "\n");
+            jTextField1.setText(new Date().toString());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,26 +222,30 @@ public class Attendance extends javax.swing.JFrame {
             }
         });
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        //get current date time with Date()
-        Date date = new Date();
-        System.out.println(dateFormat.format(date));
-        Attendance att = new Attendance();
-        JTextField jtf = new JTextField();
+        /*
+         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+         //get current date time with Date()
+         Date date = new Date();
+         System.out.println(dateFormat.format(date));
+         Attendance att = new Attendance();
+         JTextField jtf = new JTextField();
 
-        att.jTextField1.setText(dateFormat.format(date));
-        System.out.println(dateFormat.format(date));
+         att.jTextField1.setText(dateFormat.format(date));
+         System.out.println(dateFormat.format(date));
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jtfEmpID;
-    private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }
